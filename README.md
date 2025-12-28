@@ -26,10 +26,10 @@ fastapi route:
 Method = POST
 URL = "/invoke/questioner"
 ```
-there is 2 inputs:
-1- is string and its user text input,
-2- is thread_id which is unique for each chat history and websocket
-args : input_data: str, thread_id: str
+there is 2 inputs:  
+1- is string and its user text input,  
+2- is thread_id which is unique for each chat history and websocket  
+args : input_data: str, thread_id: str  
 
 output:
 ```
