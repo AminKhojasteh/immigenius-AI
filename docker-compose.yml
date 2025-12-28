@@ -1,0 +1,24 @@
+
+services:
+  check_chance:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: check_chance
+    image: dockerized-api:latest
+    env_file:
+      - .env
+    ports:
+      - "8001:8000"             
+    command: uvicorn check_chance.main:app --host 0.0.0.0 --port 8000 --workers 2
+    restart: unless-stopped
+
+  questioner:
+    container_name: questioner
+    image: dockerized-api:latest
+    env_file:
+      - .env
+    ports:
+      - "8002:8000"             
+    command: uvicorn questioner.main:app --host 0.0.0.0 --port 8000 --workers 2
+    restart: unless-stopped
