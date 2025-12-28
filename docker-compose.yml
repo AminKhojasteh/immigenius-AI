@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: check_chance
-    image: dockerized-api:latest
+    image: ai-api:latest
     env_file:
       - .env
     ports:
@@ -15,7 +15,7 @@ services:
 
   questioner:
     container_name: questioner
-    image: dockerized-api:latest
+    image: ai-api:latest
     env_file:
       - .env
     ports:
