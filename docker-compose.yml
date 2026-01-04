@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: check_chance
-    image: ai-api:latest
+    image: immigenius/ai-api:latest
     env_file:
       - .env
     ports:
@@ -14,8 +14,11 @@ services:
     restart: unless-stopped
 
   questioner:
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: questioner
-    image: ai-api:latest
+    image: immigenius/ai-api:latest
     env_file:
       - .env
     ports:
