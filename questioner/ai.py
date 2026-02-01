@@ -4,7 +4,7 @@ from langchain_xai import ChatXAI
 import os
 from langchain.agents.middleware import SummarizationMiddleware
 from langchain.agents import create_agent
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.sqlite import SqliteSaver
 from langchain_core.messages.utils import count_tokens_approximately
 from typing import Optional
 from pydantic import Field
@@ -43,19 +43,22 @@ grok_api = os.getenv("XAI_API_KEY")
 
 chat = ChatXAI(
     xai_api_key=grok_api,
-    model="grok-4-fast-non-reasoning",
+    model="grok-4-1-fast-non-reasoning",
 )
 
 # this node will summarize whole chat history if it exceeds 3500 token
 summarization_node = SummarizationMiddleware(
     token_counter=count_tokens_approximately,
     model=chat,
-    max_tokens_before_summary=3500,  # Summarize when history exceeds this
+    max_tokens_before_summary=3000,  # Summarize when history exceeds this
 
 )
 
 # save history in memory
-memory = MemorySaver()
+memory = SqliteSaver.from_conn_string(
+        "data/checkpoints.db"
+    )
+
 questioner = create_agent(
     model=chat,
     system_prompt= main_prompt , 
