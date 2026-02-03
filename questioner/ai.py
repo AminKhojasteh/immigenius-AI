@@ -56,7 +56,7 @@ summarization_node = SummarizationMiddleware(
 
 import sqlite3
 
-conn = sqlite3.connect("./data/checkpoints.sqlite", check_same_thread=False)
+conn = sqlite3.connect("./questioner/data/checkpoints.sqlite", check_same_thread=False)
 memory = SqliteSaver(conn)
 
 questioner = create_agent(
