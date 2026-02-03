@@ -2,14 +2,18 @@
 
 # 1. ایمیج سبک و سریع
 FROM python:3.11-slim
+ENV PYTHONUNBUFFERED=1
 
-# 5. اول requirements نصب بشه (بهترین کش داکر)
 
-
-RUN pip install uv
 COPY requirements.txt .
-RUN uv pip install --system -r requirements.txt
 
+RUN pip install --no-cache-dir \
+    -i https://pypi.tuna.tsinghua.edu.cn/simple \
+    --extra-index-url https://mirrors.aliyun.com/pypi/simple \
+    --trusted-host pypi.tuna.tsinghua.edu.cn \
+    --trusted-host mirrors.aliyun.com \
+    --progress-bar on \
+    -r requirements.txt
 RUN adduser --disabled-password --gecos '' appuser
 
 # 6. کپی کد پروژه با مالکیت درست
