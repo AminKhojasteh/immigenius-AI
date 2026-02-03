@@ -26,11 +26,13 @@ def invoke_questioner(req: ChatReq):
             }
         ]
     }
+    
     try:
         result = ai.questioner.invoke(
             model_input,
             config={"configurable": {"thread_id": req.thread_id}}
         )
+        
         output = {
             "ai_response" : result['structured_response'].ai_response,
             "structure_output" : result['structured_response']

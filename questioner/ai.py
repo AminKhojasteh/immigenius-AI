@@ -54,10 +54,10 @@ summarization_node = SummarizationMiddleware(
 
 )
 
-# save history in memory
-memory = SqliteSaver.from_conn_string(
-        "data/checkpoints.db"
-    )
+import sqlite3
+
+conn = sqlite3.connect("./data/checkpoints.sqlite", check_same_thread=False)
+memory = SqliteSaver(conn)
 
 questioner = create_agent(
     model=chat,

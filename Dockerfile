@@ -8,9 +8,7 @@ ENV PYTHONUNBUFFERED=1
 COPY requirements.txt .
 
 RUN pip install --no-cache-dir \
-    -i https://pypi.tuna.tsinghua.edu.cn/simple \
-    --extra-index-url https://mirrors.aliyun.com/pypi/simple \
-    --trusted-host pypi.tuna.tsinghua.edu.cn \
+    -i https://mirrors.aliyun.com/pypi/simple \
     --trusted-host mirrors.aliyun.com \
     --progress-bar on \
     -r requirements.txt
